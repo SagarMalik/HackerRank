@@ -1,0 +1,1 @@
+Select sum(Population) from City group by  District having district='California';
