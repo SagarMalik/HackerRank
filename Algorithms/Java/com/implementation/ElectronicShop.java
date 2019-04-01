@@ -2,7 +2,7 @@
 // https://github.com/SagarMalik
 
 
-package com.warmup;
+package com.implementation;
 
 import java.util.Scanner;
 
