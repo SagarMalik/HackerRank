@@ -8,22 +8,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class RepeatedString {
+public class HalloweenSale {
 
 	static class Solution {
 
-		static long repeatedString(String s, long n) {
-	      int n2=s.length(), k=(int)(n%n2);
-	      long ct=0,f=n/n2;
-	      n2=f>0?n2:k;
-	      for(int i=0;i<n2;i++){
-	        if(s.charAt(i)=='a'){
-	          ct+=f;
-	          if(i<k)
-	          ct++;
+	   static int howManyGames(int p, int d, int m, int s) {
+	        // Return the number of games you can buy
+	        int games=0,current=p;
+	        while(s>=current)
+	        {
+	          games++;
+	          s-=current;
+	          current=current-d > m ?current -d:m;
 	        }
-	      }
-	    return ct;
+	        return games;
 
 	    }
 
@@ -32,14 +30,19 @@ public class RepeatedString {
 	    public static void main(String[] args) throws IOException {
 	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        String s = scanner.nextLine();
+	        String[] pdms = scanner.nextLine().split(" ");
 
-	        long n = scanner.nextLong();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+	        int p = Integer.parseInt(pdms[0]);
 
-	        long result = repeatedString(s, n);
+	        int d = Integer.parseInt(pdms[1]);
 
-	        bufferedWriter.write(String.valueOf(result));
+	        int m = Integer.parseInt(pdms[2]);
+
+	        int s = Integer.parseInt(pdms[3]);
+
+	        int answer = howManyGames(p, d, m, s);
+
+	        bufferedWriter.write(String.valueOf(answer));
 	        bufferedWriter.newLine();
 
 	        bufferedWriter.close();

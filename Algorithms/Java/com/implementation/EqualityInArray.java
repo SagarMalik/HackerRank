@@ -1,43 +1,51 @@
 // Author: Sagar Malik
 // https://github.com/SagarMalik
 
+
 package com.implementation;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class RepeatedString {
+public class EqualityInArray {
 
 	static class Solution {
 
-		static long repeatedString(String s, long n) {
-	      int n2=s.length(), k=(int)(n%n2);
-	      long ct=0,f=n/n2;
-	      n2=f>0?n2:k;
-	      for(int i=0;i<n2;i++){
-	        if(s.charAt(i)=='a'){
-	          ct+=f;
-	          if(i<k)
-	          ct++;
-	        }
-	      }
-	    return ct;
+		static int equalizeArray(int[] arr) {
+			int max=0,v=0;
+			Map<Integer,Integer> keeper=new HashMap<>();
+			for (int num : arr){
+				v= keeper.getOrDefault(num,0)+1;
+				keeper.put(num,v);
+				max =Math.max(max,v);
+			}
+			return arr.length-max;
 
-	    }
+		}
 
 	    private static final Scanner scanner = new Scanner(System.in);
 
 	    public static void main(String[] args) throws IOException {
 	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        String s = scanner.nextLine();
-
-	        long n = scanner.nextLong();
+	        int n = scanner.nextInt();
 	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        long result = repeatedString(s, n);
+	        int[] arr = new int[n];
+
+	        String[] arrItems = scanner.nextLine().split(" ");
+	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+	        for (int i = 0; i < n; i++) {
+	            int arrItem = Integer.parseInt(arrItems[i]);
+	            arr[i] = arrItem;
+	        }
+
+	        int result = equalizeArray(arr);
 
 	        bufferedWriter.write(String.valueOf(result));
 	        bufferedWriter.newLine();

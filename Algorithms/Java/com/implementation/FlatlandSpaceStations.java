@@ -6,24 +6,25 @@ package com.implementation;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class RepeatedString {
+public class FlatlandSpaceStations {
 
 	static class Solution {
 
-		static long repeatedString(String s, long n) {
-	      int n2=s.length(), k=(int)(n%n2);
-	      long ct=0,f=n/n2;
-	      n2=f>0?n2:k;
-	      for(int i=0;i<n2;i++){
-	        if(s.charAt(i)=='a'){
-	          ct+=f;
-	          if(i<k)
-	          ct++;
+	   static int flatlandSpaceStations(int n, int[] c) {
+	        int last=0,end=n-1;
+	        Arrays.sort(c);
+	        int max=c[0]*2;
+	        for(int i=0;i<c.length;i++){
+	      
+	         max=max>c[i]-last?max:c[i]-last;
+	            last=c[i];
 	        }
-	      }
-	    return ct;
+	      max=max>(end-last)*2?max:(end-last)*2;
+	      return max/2;
+
 
 	    }
 
@@ -32,12 +33,23 @@ public class RepeatedString {
 	    public static void main(String[] args) throws IOException {
 	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        String s = scanner.nextLine();
+	        String[] nm = scanner.nextLine().split(" ");
 
-	        long n = scanner.nextLong();
+	        int n = Integer.parseInt(nm[0]);
+
+	        int m = Integer.parseInt(nm[1]);
+
+	        int[] c = new int[m];
+
+	        String[] cItems = scanner.nextLine().split(" ");
 	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        long result = repeatedString(s, n);
+	        for (int i = 0; i < m; i++) {
+	            int cItem = Integer.parseInt(cItems[i]);
+	            c[i] = cItem;
+	        }
+
+	        int result = flatlandSpaceStations(n, c);
 
 	        bufferedWriter.write(String.valueOf(result));
 	        bufferedWriter.newLine();

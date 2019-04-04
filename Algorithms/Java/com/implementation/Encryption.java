@@ -1,6 +1,7 @@
 // Author: Sagar Malik
 // https://github.com/SagarMalik
 
+
 package com.implementation;
 
 import java.io.BufferedWriter;
@@ -8,25 +9,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class RepeatedString {
+public class Encryption {
 
-	static class Solution {
+	static  class Solution {
 
-		static long repeatedString(String s, long n) {
-	      int n2=s.length(), k=(int)(n%n2);
-	      long ct=0,f=n/n2;
-	      n2=f>0?n2:k;
-	      for(int i=0;i<n2;i++){
-	        if(s.charAt(i)=='a'){
-	          ct+=f;
-	          if(i<k)
-	          ct++;
-	        }
-	      }
-	    return ct;
+	  static String encryption(String s) {
+	      int l=s.length();
+	      double sq=Math.sqrt(l);
+	      int row=(int)Math.floor(sq),column=(int)Math.ceil(sq);
+	      if (row*column<l)
+	      row+=1;
+	      StringBuilder sb=new StringBuilder();
+	      int k=0;
+	      for(int i=0;i<column;i++){
+	         for(int j=0;j<row;j++){
+	           k=i+j*column;
+	              if (k<l)
+	              sb.append(s.charAt(k));
+	         }
+	               sb.append(' ');
 
 	    }
-
+	    return sb.toString();
+	    }
 	    private static final Scanner scanner = new Scanner(System.in);
 
 	    public static void main(String[] args) throws IOException {
@@ -34,12 +39,9 @@ public class RepeatedString {
 
 	        String s = scanner.nextLine();
 
-	        long n = scanner.nextLong();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+	        String result = encryption(s);
 
-	        long result = repeatedString(s, n);
-
-	        bufferedWriter.write(String.valueOf(result));
+	        bufferedWriter.write(result);
 	        bufferedWriter.newLine();
 
 	        bufferedWriter.close();
