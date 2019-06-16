@@ -6,11 +6,19 @@ Solution to HackerRank problems
 
 ## SQL - 58/58
 
-## Problem Solving - 101 / 563
+## Problem Solving - 136 / 563
 
-### Algorithms 
+### Algorithms
 
       Warm Up - 10/10
       Implementation - 62/66
       Strings  - 23/
-      GraphTheory - 6/
+      GraphTheory - 7/
+      Sorting - 10/
+      Search - 4/
+      Greedy - 15/
+      Debugging - 4/
+
+### DataStructures
+
+      Arrays - 1/

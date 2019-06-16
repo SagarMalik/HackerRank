@@ -14,80 +14,87 @@ import java.util.stream.Stream;
 
 public class RotateMatrix {
 
-	static class Solution {
-		static void printMatrix(List<List<Integer>> matrix) {
-			boolean first=true;  
-			for(List<Integer>row : matrix) {
-				first=true;
-				for(Integer column: row) {
-					if(!first)
-						System.out.print(" ");
-					first=false;
-					System.out.print(column);
-				}
-				System.out.println( );
-			}
-		}
-		static void rotateLayer(List<List<Integer>> matrix,int row,int column, int rotation,int iStart,int jStart) {
-			int factor=2*(row+column)-4,jEnd=jStart+column-1,iEnd=iStart+row-1;
-			rotation=rotation%(factor);
-			List<Integer>  temp=new ArrayList<>();
-			for(int  j=jStart;j<=jEnd;j++)  temp.add(matrix.get(iStart).get(j));
-			for(int  j=iStart+1;j<iEnd;j++) temp.add(matrix.get(j).get(jEnd));
-			for(int  j=jEnd;j>=jStart;j--)  temp.add(matrix.get(iEnd).get(j));
-			for(int  j=iEnd-1;j>iStart;j--)  temp.add(matrix.get(j).get(jStart));
-			int pos=rotation;
-			for(int j=0;j<column;j++)   matrix.get(iStart).set(jStart+j,temp.get(pos++%factor));
-			for(int j=1;j<row-1;j++)    matrix.get(iStart+j).set(jEnd,temp.get(pos++%factor));
-			for(int j=1;j<column;j++)   matrix.get(iEnd).set(jEnd-j,temp.get(pos++%factor));
-			for(int j=1;j<row-1;j++)    matrix.get(iEnd-j).set(jStart,temp.get(pos++%factor));     
+  static class Solution {
+    static void printMatrix(List<List<Integer>> matrix) {
+      boolean first = true;
+      for (List<Integer> row : matrix) {
+        first = true;
+        for (Integer column : row) {
+          if (!first)
+            System.out.print(" ");
+          first = false;
+          System.out.print(column);
+        }
+        System.out.println();
+      }
+    }
 
-		}
-	
-		static void matrixRotation(List<List<Integer>> matrix, int r) {
-			int m=matrix.size(),n=matrix.get(0).size();
-			int layer_count=Math.min(n,m)/2;
-			for(int k=0;k<layer_count;k++) {
-				rotateLayer(matrix,m-2*k,n-2*k,r,k,k);
-			}
-			printMatrix(matrix);
+    static void rotateLayer(List<List<Integer>> matrix, int row, int column, int rotation,
+        int iStart, int jStart) {
+      int factor = 2 * (row + column) - 4, jEnd = jStart + column - 1, iEnd = iStart + row - 1;
+      rotation = rotation % (factor);
+      List<Integer> temp = new ArrayList<>();
+      for (int j = jStart; j <= jEnd; j++)
+        temp.add(matrix.get(iStart).get(j));
+      for (int j = iStart + 1; j < iEnd; j++)
+        temp.add(matrix.get(j).get(jEnd));
+      for (int j = jEnd; j >= jStart; j--)
+        temp.add(matrix.get(iEnd).get(j));
+      for (int j = iEnd - 1; j > iStart; j--)
+        temp.add(matrix.get(j).get(jStart));
+      int pos = rotation;
+      for (int j = 0; j < column; j++)
+        matrix.get(iStart).set(jStart + j, temp.get(pos++ % factor));
+      for (int j = 1; j < row - 1; j++)
+        matrix.get(iStart + j).set(jEnd, temp.get(pos++ % factor));
+      for (int j = 1; j < column; j++)
+        matrix.get(iEnd).set(jEnd - j, temp.get(pos++ % factor));
+      for (int j = 1; j < row - 1; j++)
+        matrix.get(iEnd - j).set(jStart, temp.get(pos++ % factor));
 
-		}
+    }
 
-		public static void main(String[] args) throws IOException {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    static void matrixRotation(List<List<Integer>> matrix, int r) {
+      int m = matrix.size(), n = matrix.get(0).size();
+      int layer_count = Math.min(n, m) / 2;
+      for (int k = 0; k < layer_count; k++) {
+        rotateLayer(matrix, m - 2 * k, n - 2 * k, r, k, k);
+      }
+      printMatrix(matrix);
 
-			String[] mnr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+    }
 
-			int m = Integer.parseInt(mnr[0]);
+    public static void main(String[] args) throws IOException {
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-			int n = Integer.parseInt(mnr[1]);
+      String[] mnr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
 
-			int r = Integer.parseInt(mnr[2]);
+      int m = Integer.parseInt(mnr[0]);
 
-			List<List<Integer>> matrix = new ArrayList<>();
+      // int n = Integer.parseInt(mnr[1]);
 
-			IntStream.range(0, m).forEach(i -> {
-				try {
-					matrix.add(
-							Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-							.map(Integer::parseInt)
-							.collect(Collectors.toList())
-							);
-				} catch (IOException ex) {
-					throw new RuntimeException(ex);
-				}
-			});
+      int r = Integer.parseInt(mnr[2]);
 
-			matrixRotation(matrix, r);
+      List<List<Integer>> matrix = new ArrayList<>();
 
-			bufferedReader.close();
-		}
-	}
+      IntStream.range(0, m).forEach(i -> {
+        try {
+          matrix.add(Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+              .map(Integer::parseInt).collect(Collectors.toList()));
+        } catch (IOException ex) {
+          throw new RuntimeException(ex);
+        }
+      });
 
-	public static void main(String[] args) throws IOException {
-		Solution.main(args);
+      matrixRotation(matrix, r);
 
-	}
+      bufferedReader.close();
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
+
+  }
 
 }

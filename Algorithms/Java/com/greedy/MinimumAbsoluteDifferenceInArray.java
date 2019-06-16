@@ -1,29 +1,28 @@
 // Author: Sagar Malik
 // https://github.com/SagarMalik
 
-package com.strings;
+
+package com.greedy;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class CeaserCipher {
+public class MinimumAbsoluteDifferenceInArray {
 
   static class Solution {
-    // Complete the caesarCipher function below.
-    static String caesarCipher(String s, int k) {
-      k = k % 26;
-      char[] chars = s.toCharArray();
-      int n = chars.length;
-      for (int i = 0; i < n; i++) {
-        if (chars[i] >= 'a' && chars[i] <= 'z') {
-          chars[i] = (char) ('a' + (chars[i] - 'a' + k) % 26);
-        } else if (chars[i] >= 'A' && chars[i] <= 'Z') {
-          chars[i] = (char) ('A' + (chars[i] - 'A' + k) % 26);
-        }
+
+    // Complete the minimumAbsoluteDifference function below.
+    static int minimumAbsoluteDifference(int[] arr) {
+      Arrays.sort(arr);
+      int n = arr.length;
+      int min = Integer.MAX_VALUE;
+      for (int i = 1; i < n; i++) {
+        min = Math.min(min, arr[i] - arr[i - 1]);
       }
-      return new String(chars);
+      return min;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -32,17 +31,22 @@ public class CeaserCipher {
       BufferedWriter bufferedWriter =
           new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-      // int n = scanner.nextInt();
+      int n = scanner.nextInt();
       scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-      String s = scanner.nextLine();
+      int[] arr = new int[n];
 
-      int k = scanner.nextInt();
+      String[] arrItems = scanner.nextLine().split(" ");
       scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-      String result = caesarCipher(s, k);
+      for (int i = 0; i < n; i++) {
+        int arrItem = Integer.parseInt(arrItems[i]);
+        arr[i] = arrItem;
+      }
 
-      bufferedWriter.write(result);
+      int result = minimumAbsoluteDifference(arr);
+
+      bufferedWriter.write(String.valueOf(result));
       bufferedWriter.newLine();
 
       bufferedWriter.close();
