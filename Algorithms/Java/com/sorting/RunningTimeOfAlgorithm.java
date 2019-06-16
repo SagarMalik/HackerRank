@@ -10,58 +10,59 @@ import java.util.Scanner;
 
 public class RunningTimeOfAlgorithm {
 
-	static class Solution {
+  static class Solution {
 
-	    // Complete the runningTime function below.
-	    static int runningTime(int[] arr) {
-	        int count=0,n=arr.length;
-	     for(int i=1;i<n;i++){
-	              int el=arr[i];
-	              for(int j=0;j<i;j++){
-	                  if (arr[j]>el){  // found position
-	                  System.arraycopy(arr,j,arr,j+1,i-j);
-	                  count+=i-j;
-	                  arr[j]=el;
-	                      break;
-	                  }
-	              }
-	           //   printArray(arr);
-	          }
-	return count;
-	    }
+    // Complete the runningTime function below.
+    static int runningTime(int[] arr) {
+      int count = 0, n = arr.length;
+      for (int i = 1; i < n; i++) {
+        int el = arr[i];
+        for (int j = 0; j < i; j++) {
+          if (arr[j] > el) { // found position
+            System.arraycopy(arr, j, arr, j + 1, i - j);
+            count += i - j;
+            arr[j] = el;
+            break;
+          }
+        }
+        // printArray(arr);
+      }
+      return count;
+    }
 
-	    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-	    public static void main(String[] args) throws IOException {
-	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    public static void main(String[] args) throws IOException {
+      BufferedWriter bufferedWriter =
+          new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        int n = scanner.nextInt();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+      int n = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        int[] arr = new int[n];
+      int[] arr = new int[n];
 
-	        String[] arrItems = scanner.nextLine().split(" ");
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+      String[] arrItems = scanner.nextLine().split(" ");
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        for (int i = 0; i < n; i++) {
-	            int arrItem = Integer.parseInt(arrItems[i]);
-	            arr[i] = arrItem;
-	        }
+      for (int i = 0; i < n; i++) {
+        int arrItem = Integer.parseInt(arrItems[i]);
+        arr[i] = arrItem;
+      }
 
-	        int result = runningTime(arr);
+      int result = runningTime(arr);
 
-	        bufferedWriter.write(String.valueOf(result));
-	        bufferedWriter.newLine();
+      bufferedWriter.write(String.valueOf(result));
+      bufferedWriter.newLine();
 
-	        bufferedWriter.close();
+      bufferedWriter.close();
 
-	        scanner.close();
-	    }
-	}
+      scanner.close();
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		Solution.main(args);
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
 
-	}
+  }
 
 }

@@ -13,69 +13,70 @@ import java.util.Scanner;
 
 public class SherlockAndAnagrams {
 
-	static class Solution {
+  static class Solution {
 
-	    // Complete the sherlockAndAnagrams function below.
-	    static int sherlockAndAnagrams(String s) {
-	        int count=0,len=s.length();
-	        Map<String,Integer> map=new HashMap<>();
-	        String stCompressed;
-	        for(int i=0;i<len;i++) {
-	            for(int j=i+1;j<=len;j++) {
-	                stCompressed=getCompressedAnagram(s.substring(i, j));
-	                count=map.getOrDefault(stCompressed,0);
-	                map.put(stCompressed, count+1);
-	            }
-	        }
-	        count=0;
-	        for(Integer val:map.values()) 
-	            count+=(val*(val-1))/2;
-	        
-	        return count;
-	    }
+    // Complete the sherlockAndAnagrams function below.
+    static int sherlockAndAnagrams(String s) {
+      int count = 0, len = s.length();
+      Map<String, Integer> map = new HashMap<>();
+      String stCompressed;
+      for (int i = 0; i < len; i++) {
+        for (int j = i + 1; j <= len; j++) {
+          stCompressed = getCompressedAnagram(s.substring(i, j));
+          count = map.getOrDefault(stCompressed, 0);
+          map.put(stCompressed, count + 1);
+        }
+      }
+      count = 0;
+      for (Integer val : map.values())
+        count += (val * (val - 1)) / 2;
 
-	    private static String getCompressedAnagram(String st) {
-	        int[] charCt=new int[26];
-	        char c;
-	        for(int i=0;i<st.length();i++) {
-	            c=st.charAt(i);
-	            charCt[(int)c - 'a']++;
-	        }
-	        StringBuilder sb=new StringBuilder();
-	        for(int i=0;i<26;i++)
-	        {
-	            if(charCt[i]>0)
-	                sb.append((char)(i+'a')).append(charCt[i]);
-	        }
-	        return sb.toString();
-	    }
-	    
+      return count;
+    }
 
-	    private static final Scanner scanner = new Scanner(System.in);
+    private static String getCompressedAnagram(String st) {
+      int[] charCt = new int[26];
+      char c;
+      for (int i = 0; i < st.length(); i++) {
+        c = st.charAt(i);
+        charCt[(int) c - 'a']++;
+      }
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < 26; i++) {
+        if (charCt[i] > 0)
+          sb.append((char) (i + 'a')).append(charCt[i]);
+      }
+      return sb.toString();
+    }
 
-	    public static void main(String[] args) throws IOException {
-	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        int q = scanner.nextInt();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+    private static final Scanner scanner = new Scanner(System.in);
 
-	        for (int qItr = 0; qItr < q; qItr++) {
-	            String s = scanner.nextLine();
+    public static void main(String[] args) throws IOException {
+      BufferedWriter bufferedWriter =
+          new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	            int result = sherlockAndAnagrams(s);
+      int q = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	            bufferedWriter.write(String.valueOf(result));
-	            bufferedWriter.newLine();
-	        }
+      for (int qItr = 0; qItr < q; qItr++) {
+        String s = scanner.nextLine();
 
-	        bufferedWriter.close();
+        int result = sherlockAndAnagrams(s);
 
-	        scanner.close();
-	    }
-	}
-	public static void main(String[] args) throws IOException {
-		Solution.main(args);
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+      }
 
-	}
+      bufferedWriter.close();
+
+      scanner.close();
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
+
+  }
 
 }

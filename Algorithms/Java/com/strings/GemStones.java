@@ -14,58 +14,59 @@ import java.util.Set;
 
 public class GemStones {
 
-	static class Solution {
+  static class Solution {
 
-	    // Complete the gemstones function below.
-	    static int gemstones(String[] arr) {
-	    Set<Character> set=new HashSet<>();
-	    Iterator<Character> it;
-	    String first=arr[0];
-	    int n=first.length();
-	    for(int i=0;i<n;i++){
-	      set.add(first.charAt(i));
-	    }
-	    for(int i=1;i<arr.length && set.size()>0;i++){
-	      it=set.iterator();
-	      while(it.hasNext()){
-	        if(arr[i].indexOf(it.next())==-1)
-	        it.remove();
-	      }
-	    }
+    // Complete the gemstones function below.
+    static int gemstones(String[] arr) {
+      Set<Character> set = new HashSet<>();
+      Iterator<Character> it;
+      String first = arr[0];
+      int n = first.length();
+      for (int i = 0; i < n; i++) {
+        set.add(first.charAt(i));
+      }
+      for (int i = 1; i < arr.length && set.size() > 0; i++) {
+        it = set.iterator();
+        while (it.hasNext()) {
+          if (arr[i].indexOf(it.next()) == -1)
+            it.remove();
+        }
+      }
 
-	    return set.size();
+      return set.size();
 
-	    }
+    }
 
-	    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-	    public static void main(String[] args) throws IOException {
-	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    public static void main(String[] args) throws IOException {
+      BufferedWriter bufferedWriter =
+          new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        int n = scanner.nextInt();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+      int n = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        String[] arr = new String[n];
+      String[] arr = new String[n];
 
-	        for (int i = 0; i < n; i++) {
-	            String arrItem = scanner.nextLine();
-	            arr[i] = arrItem;
-	        }
+      for (int i = 0; i < n; i++) {
+        String arrItem = scanner.nextLine();
+        arr[i] = arrItem;
+      }
 
-	        int result = gemstones(arr);
+      int result = gemstones(arr);
 
-	        bufferedWriter.write(String.valueOf(result));
-	        bufferedWriter.newLine();
+      bufferedWriter.write(String.valueOf(result));
+      bufferedWriter.newLine();
 
-	        bufferedWriter.close();
+      bufferedWriter.close();
 
-	        scanner.close();
-	    }
-	}
+      scanner.close();
+    }
+  }
 
-	public static void main(String[] args) throws IOException {
-		Solution.main(args);
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
 
-	}
+  }
 
 }

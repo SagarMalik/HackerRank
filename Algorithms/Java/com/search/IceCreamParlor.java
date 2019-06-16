@@ -12,83 +12,84 @@ import java.util.Scanner;
 
 public class IceCreamParlor {
 
-	static class Solution {
+  static class Solution {
 
-	    // Complete the icecreamParlor function below.
-	    static int[] icecreamParlor(int m, int[] arr) {
-	          int[][] arr2 = new int[arr.length][2];
-	          for(int i=0;i<arr.length;i++) {
-	              arr2[i][0]=arr[i];
-	              arr2[i][1]=i+1;
-	          }
-	          int j;
-	          Arrays.sort(arr2,(int[]a , int []b)->a[0]-b[0]);
-	          Arrays.sort(arr);
-	          for(int i=0;i<arr.length;i++) {
-	          j=    Arrays.binarySearch(arr, m-arr[i]);
-	          if(j>=i) {
-	              if(j==i)
-	                  j++;
-	                    int []result=new int[2];
-	              result[0]=arr2[i][1];
-	              result[1]=arr2[j][1];
-	              Arrays.sort(result);
-	              return result;
-	              
-	              
-	          }
-	          }
-	    return null;
+    // Complete the icecreamParlor function below.
+    static int[] icecreamParlor(int m, int[] arr) {
+      int[][] arr2 = new int[arr.length][2];
+      for (int i = 0; i < arr.length; i++) {
+        arr2[i][0] = arr[i];
+        arr2[i][1] = i + 1;
+      }
+      int j;
+      Arrays.sort(arr2, (int[] a, int[] b) -> a[0] - b[0]);
+      Arrays.sort(arr);
+      for (int i = 0; i < arr.length; i++) {
+        j = Arrays.binarySearch(arr, m - arr[i]);
+        if (j >= i) {
+          if (j == i)
+            j++;
+          int[] result = new int[2];
+          result[0] = arr2[i][1];
+          result[1] = arr2[j][1];
+          Arrays.sort(result);
+          return result;
 
-	    }
 
-	    private static final Scanner scanner = new Scanner(System.in);
+        }
+      }
+      return null;
 
-	    public static void main(String[] args) throws IOException {
-	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    }
 
-	        int t = scanner.nextInt();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+    private static final Scanner scanner = new Scanner(System.in);
 
-	        for (int tItr = 0; tItr < t; tItr++) {
-	            int m = scanner.nextInt();
-	            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+    public static void main(String[] args) throws IOException {
+      BufferedWriter bufferedWriter =
+          new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	            int n = scanner.nextInt();
-	            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+      int t = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	            int[] arr = new int[n];
+      for (int tItr = 0; tItr < t; tItr++) {
+        int m = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	            String[] arrItems = scanner.nextLine().split(" ");
-	            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	            for (int i = 0; i < n; i++) {
-	                int arrItem = Integer.parseInt(arrItems[i]);
-	                arr[i] = arrItem;
-	            }
+        int[] arr = new int[n];
 
-	            int[] result = icecreamParlor(m, arr);
+        String[] arrItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	            for (int i = 0; i < result.length; i++) {
-	                bufferedWriter.write(String.valueOf(result[i]));
+        for (int i = 0; i < n; i++) {
+          int arrItem = Integer.parseInt(arrItems[i]);
+          arr[i] = arrItem;
+        }
 
-	                if (i != result.length - 1) {
-	                    bufferedWriter.write(" ");
-	                }
-	            }
+        int[] result = icecreamParlor(m, arr);
 
-	            bufferedWriter.newLine();
-	        }
+        for (int i = 0; i < result.length; i++) {
+          bufferedWriter.write(String.valueOf(result[i]));
 
-	        bufferedWriter.close();
+          if (i != result.length - 1) {
+            bufferedWriter.write(" ");
+          }
+        }
 
-	        scanner.close();
-	    }
-	}
+        bufferedWriter.newLine();
+      }
 
-	public static void main(String[] args) throws IOException {
-		Solution.main(args);
+      bufferedWriter.close();
 
-	}
+      scanner.close();
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
+
+  }
 
 }

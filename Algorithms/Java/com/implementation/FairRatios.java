@@ -10,60 +10,60 @@ import java.util.Scanner;
 
 public class FairRatios {
 
-	static  class Solution {
+  static class Solution {
 
-	  static int fairRations(int[] B) {
-	    int sum=0,chain=0;
-	    boolean fChain=false;
-	    for(int i=0;i<B.length;i++)
-	    {
-	        sum+=B[i];
+    static int fairRations(int[] B) {
+      int sum = 0, chain = 0;
+      boolean fChain = false;
+      for (int i = 0; i < B.length; i++) {
+        sum += B[i];
 
-	        if(B[i]%2==1){
-	            fChain=!fChain;
-	             }
-	       
-	            if (fChain)
-	            chain++;
-	       
-	    }
-	    if(sum%2==1)
-	    return -1;
-	    return chain*2;
+        if (B[i] % 2 == 1) {
+          fChain = !fChain;
+        }
 
-	    }
+        if (fChain)
+          chain++;
 
-	    private static final Scanner scanner = new Scanner(System.in);
+      }
+      if (sum % 2 == 1)
+        return -1;
+      return chain * 2;
 
-	    public static void main(String[] args) throws IOException {
-	        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+    }
 
-	        int N = scanner.nextInt();
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+    private static final Scanner scanner = new Scanner(System.in);
 
-	        int[] B = new int[N];
+    public static void main(String[] args) throws IOException {
+      BufferedWriter bufferedWriter =
+          new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-	        String[] BItems = scanner.nextLine().split(" ");
-	        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+      int N = scanner.nextInt();
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        for (int i = 0; i < N; i++) {
-	            int BItem = Integer.parseInt(BItems[i]);
-	            B[i] = BItem;
-	        }
+      int[] B = new int[N];
 
-	        int result = fairRations(B);
+      String[] BItems = scanner.nextLine().split(" ");
+      scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-	        bufferedWriter.write(result!=-1?String.valueOf(result):"NO");
-	        bufferedWriter.newLine();
+      for (int i = 0; i < N; i++) {
+        int BItem = Integer.parseInt(BItems[i]);
+        B[i] = BItem;
+      }
 
-	        bufferedWriter.close();
+      int result = fairRations(B);
 
-	        scanner.close();
-	    }
-	}
+      bufferedWriter.write(result != -1 ? String.valueOf(result) : "NO");
+      bufferedWriter.newLine();
 
-	public static void main(String[] args) throws IOException {
-	Solution.main(args);	
-	}
+      bufferedWriter.close();
+
+      scanner.close();
+    }
+  }
+
+  public static void main(String[] args) throws IOException {
+    Solution.main(args);
+  }
 
 }
